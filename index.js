@@ -11,7 +11,7 @@ const noteRoute = require('./routes/notes')
 const logoutRoute = require('./routes/logout')
 
 app.use(express.json())
-app.use(cors({credentials: true , origin: 'http://localhost:3000' }))
+app.use(cors({credentials: true , origin: ['http://localhost:3000' , 'https://notex-amfu.onrender.com/' ] }))
 app.use(cookieParser())
 
 const connection = require("./db")
