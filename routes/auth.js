@@ -30,7 +30,8 @@ router.post("/" , async (req,res)=>{
         const token = user.generateAuthToken();
 
         return res.status(200).cookie('token', token,{
-            sameSite: 'strict' , 
+            sameSite: 'none' , 
+            secure: true,
             path:'/' , 
             httpOnly: true,
             expires: new Date(new Date().getTime()+86400*1000)
