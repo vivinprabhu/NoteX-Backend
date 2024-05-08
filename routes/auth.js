@@ -30,7 +30,7 @@ router.post("/" , async (req,res)=>{
         const token = user.generateAuthToken();
 
         return res.status(200).cookie('token', token,{
-            sameSite: 'none' , 
+            sameSite: 'lax' , 
             secure: true,
             path:'/' , 
             httpOnly: true,
