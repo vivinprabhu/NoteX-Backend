@@ -30,7 +30,7 @@ router.post("/" , async (req,res)=>{
         const token = user.generateAuthToken();
 
         return res.status(200).cookie('token', token,{
-            sameSite: 'lax' , 
+            sameSite: 'none' ,  //for hosting only, as lax and strict is not support by render else for a good deployment sameSite: 'strict' 
             secure: true,
             path:'/' , 
             httpOnly: true,
