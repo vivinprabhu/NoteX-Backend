@@ -9,7 +9,7 @@ const roleCheck = require('../role/roleCheck')
 const noteModel = require('../model/note');
 const { cookieJwtAuth } = require('../routes/verifyToken')
 
-router.get("/getNotes", auth , roleCheck("user") , cookieJwtAuth, async (req, res) => {
+router.get("/getNotes", async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate("notes");
         res.json(user.notes); 
@@ -18,7 +18,7 @@ router.get("/getNotes", auth , roleCheck("user") , cookieJwtAuth, async (req, re
     }
 })
 
-router.post("/createNotes", auth , roleCheck("user"), cookieJwtAuth, async (req, res) => {
+router.post("/createNotes", cookieJwtAuth, async (req, res) => {
     try {
         const newNote = await noteModel.create({...req.body , user : req.user._id});
         await User.findByIdAndUpdate(req.user._id,{$push:{notes: newNote._id}});
@@ -42,7 +42,7 @@ router.put("/updateNote/:id", auth , roleCheck("user"), cookieJwtAuth, async (re
         .catch(err => res.json(err))
 })
 
-router.delete("/deleteNote/:id", auth , roleCheck("user"), cookieJwtAuth, async (req, res) => {
+router.delete("/deleteNote/:id", auth , roleCheck("user"), async (req, res) => {
     const id = req.params.id;
     try {
         const deleteNote = await noteModel.findByIdAndDelete(id);
