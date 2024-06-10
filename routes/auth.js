@@ -30,11 +30,7 @@ router.post("/" , async (req,res)=>{
         const token = user.generateAuthToken();
 
         return res.status(200).cookie('token', token,{
-            sameSite: 'none' ,  //for hosting only, as lax and strict is not support by render else for a good deployment sameSite: 'strict' 
-            secure: true,
-            path:'/' , 
             httpOnly: true,
-            expires: new Date(new Date().getTime()+86400*1000)
           }).send({data: token , message: "Loggedin successfully"});
         } 
     catch (error) {
