@@ -34,7 +34,8 @@ router.post("/" , async (req,res)=>{
             secure: true,
             path:'/' , 
             httpOnly: true,
-            expires: new Date(new Date().getTime()+86400*1000)
+            expires: new Date(new Date().getTime()+86400*1000),
+            domain: 'notex-amfu.onrender.com',
           }).send({data: token , message: "Loggedin successfully"});
         } 
     catch (error) {
